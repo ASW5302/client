@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
+import React, { useState, useEffect } from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { RxDotFilled } from "react-icons/rx";
 
 const Slide = () => {
@@ -8,31 +8,77 @@ const Slide = () => {
     { url: "./imgs/02.jpg" },
     { url: "./imgs/03.jpg" },
   ];
-  const [currentIndex, setCuttentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const prevSlider = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? sliders.length - 1 : currentIndex - 1;
-    setCuttentIndex(newIndex);
+    setCurrentIndex(newIndex);
   };
   const nextSlider = () => {
     const isLastSlide = currentIndex === sliders.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCuttentIndex(newIndex);
+    setCurrentIndex(newIndex);
   };
   const moveSlider = (slideIndex) => {
-    setCuttentIndex(slideIndex);
+    setCurrentIndex(slideIndex);
   };
+  useEffect(() => {
+    console.log("랜더링");
+    /*   setTimeout(nextSlider, 5000); */
+    setInterval(nextSlider, 1000);
+  }, [currentIndex]);
+
   return (
-    <div className="max-2-[1540px] h-[500px] w-full m-auto py-4 px-4 relative group">
+    <div
+      className="max-w-[1540px] 
+                    h-[500px]
+                    w-full 
+                    m-auto 
+                    py-4 
+                    px-4
+                    relative
+                    group"
+    >
       <div
-        className="w-full h-full rounded-2xl bg-cover duration-300"
+        className="w-full h-full 
+                       rounded-2xl bg-center 
+                       bg-cover duration-300"
         style={{ backgroundImage: `url(${sliders[currentIndex].url})` }}
       ></div>
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-orange-700 text-white cursor-pointer">
-        <RiArrowLeftSLine onClick={nextSlider} />
+      <div
+        className="hidden 
+                       group-hover:block 
+                       absolute 
+                       top-[50%]
+                       -translate-x-0
+                       translate-y-[-50%]
+                       left-5 text-2xl rounded-full
+                       p-2 bg-orange-700 text-white cursor-pointer"
+      >
+        <HiChevronLeft onClick={prevSlider} />
       </div>
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-orange-700 text-white cursor-pointer">
-        <RiArrowRightSLine onClick={prevSlider} />
+      <div
+        className="hidden 
+                       group-hover:block 
+                       absolute 
+                       top-[50%]
+                       -translate-x-0
+                       translate-y-[-50%]
+                       right-5 text-2xl rounded-full
+                       p-2 bg-orange-700 text-white cursor-pointer"
+      >
+        <HiChevronRight onClick={nextSlider} />
+      </div>
+      <div className="flex top-4 justify-center py-2">
+        {sliders.map((sliderItem, sliderIndex) => (
+          <div
+            key={sliderIndex}
+            className="text-2xl cursor-pointer"
+            onClick={() => moveSlider(sliderIndex)}
+          >
+            <RxDotFilled />
+          </div>
+        ))}
       </div>
     </div>
   );

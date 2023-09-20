@@ -7,7 +7,6 @@ import { MdHelp, MdOutlineFavorite } from "react-icons/md";
 
 const TopNav = () => {
   const [sideNav, setSideNav] = useState(false);
-  console.log(sideNav);
   return (
     <div
       className="max-w-[1520px] 
@@ -25,7 +24,7 @@ const TopNav = () => {
                            lg:text-4xl 
                            px-2"
         >
-          Wein's <span className="font-bold">요리교실</span>
+          ASW's <span className="font-bold">요리교실</span>
         </h1>
 
         <div
@@ -96,7 +95,7 @@ const TopNav = () => {
           className="absolute right-4 top-4 cursor-pointer"
         />
         <h2 className="text-2xl p-4">
-          Wein's<span clasName="text-orange-700 font-bold">요리교실</span>
+          Wein's<span className="text-orange-700 font-bold">요리교실</span>
         </h2>
         <nav>
           <ul className="flex flex-col p-4 text-gray-900">
